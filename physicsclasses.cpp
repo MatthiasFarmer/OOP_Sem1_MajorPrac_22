@@ -20,10 +20,12 @@ class objects
         virtual int get_mass() = 0;
 
         // abstract function set position
-        virtual void set_position() = 0;
+        //virtual void set_position() = 0;
 
         // abstract fucntion get position
         virtual Vector2f get_position() = 0; 
+
+        virtual void render(RenderWindow& win) = 0; 
 
 };
 
@@ -51,13 +53,14 @@ class gravitySource : public objects
             velocity.y = 0; 
 
             //Setting the shape to be rendered later on
-            shape.setPosition(position.x,position.y);
+            shape.setPosition(position_grav.x,position_grav.y);
+            shape.setOrigin(position_grav.x-30, position_grav.y-30);
             shape.setFillColor(Color::White);
             shape.setRadius(30);  // can make this dynamic so that the radius changes with options of planet
         }
 
         // function returns the mass
-        int get_mass(){
+        int get_mass() override{
             return mass; 
         }
 
@@ -67,9 +70,15 @@ class gravitySource : public objects
         }
 
         // function gets the position of the gravity source
-        Vector2f get_position(){
+        Vector2f get_position() override{
             return shape.getPosition();
         }
+
+        // function renders the gravity source
+        void render(RenderWindow& win) override{
+        win.draw(shape);
+        }
+
 };
 
 
@@ -105,7 +114,7 @@ class particle : public objects
         }
 
         // function returns mass
-        int get_mass(){
+        int get_mass() override{
             return mass; 
         }
 
@@ -115,7 +124,7 @@ class particle : public objects
         }
 
         // function get position
-        Vector2f get_position(){
+        Vector2f get_position() override{
             return shape.getPosition();
         }
 
@@ -147,21 +156,60 @@ class particle : public objects
             //update position
             position += velocity; 
 
+        }
 
-            //======== old version ===========
-            /*float distance_x = source.get_position().x - position.x;   
-            float distance_y = source.get_position().y - position.y;   
-            float distance = sqrt(distance_x * distance_x + distance_y * distance_y);  
-            float normalized_x = inverse_distance * distance_x;     
-            float normalized_y = inverse_distance * distance_y;     
-            float inverse_square_dropoff = inverse_distance * inverse_distance;  
-            float acceleration_x = normalized_x * s.get_strength() * inverse_square_dropoff;  
-            float acceleration_y = normalized_y * s.get_strength() * inverse_square_dropoff;  
-            velocity.x += acceleration_x; 
-            vel.y += acceleration_y;
-            pos.x += vel.x;
-            pos.y += vel.y;*/
 
+        // function renders the particle
+        void render(RenderWindow& win) override{
+            shape.setPosition(position.x,position.y);
+            win.draw(shape);
         }
 
 };
+
+
+int main(){
+
+    sf::RenderWindow window(sf::VideoMode(1600, 800), "My Program");
+    window.setFramerateLimit(60);
+
+    gravitySource earth(Vector2f(1600/2,800/2), 800);
+
+    particle asteroid(600,400,10,3,-2);
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            switch (event.type)
+            {
+            case Event::Closed:
+                window.close();
+                break;
+            
+            case Event::KeyPressed:
+                if(event.key.code == Keyboard::Escape)
+                    window.close();
+                break;
+
+            default:
+                break;
+            }
+        }
+        
+        window.clear();
+
+        asteroid.update_physics(earth);
+
+        earth.render(window);
+
+        asteroid.render(window);
+
+        window.display(); 
+
+
+    }
+
+    return 0; 
+}
