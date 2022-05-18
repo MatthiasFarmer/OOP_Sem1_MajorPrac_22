@@ -4,6 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
+#include "Menu.h"
+#include "particle.h"
+#include "gravitySource.h"
+#include "objects.h"
+
+
 
 /*
 
@@ -12,15 +18,19 @@
 
 */
 
-class Game
+class Game : public Menu, public particle, public gravitySource
 {
 
-private:
+protected:
 	//Variables
+	int is_play;
+
+
 	//Window
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
+
 
 	//Private functions
 	void initWindow();
@@ -39,5 +49,7 @@ public:
 	void pollEvents();
 	void update();
 	void render();
+	void gameLoop(Game game);
 
 };
+

@@ -35,7 +35,7 @@ class particle : public objects
 
 
         // function renders the particle
-        void render(RenderWindow& win) override;
+        void render(sf::RenderWindow* win) override;
 
 };
 
