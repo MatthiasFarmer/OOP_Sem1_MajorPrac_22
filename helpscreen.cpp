@@ -79,7 +79,25 @@ helpScreen::helpScreen(){
     text6.setFillColor(Color::White);
     text6.setPosition(20,500);
 
+    Text text7;
+    text7.setFont(font);
+    text7.setString("Controls:");
+    text7.setCharacterSize(20);
+    text7.setFillColor(Color::White);
+    text7.setPosition(900,450);
 
+    Text text8;
+    text8.setFont(font);
+    text8.setString(
+        "When in the simulator press:\n"
+        "P to exit\n"
+        "W to increase number of particles\n"
+        "S to decrease number of particles\n"
+    
+    );
+    text8.setCharacterSize(18);
+    text8.setFillColor(Color::White);
+    text8.setPosition(900,470);
 
     // Main Loop for help window
     while (this->window->isOpen()){
@@ -111,6 +129,8 @@ helpScreen::helpScreen(){
         this->window->draw(text4);
         this->window->draw(text5);
         this->window->draw(text6);
+        this->window->draw(text7);
+        this->window->draw(text8);
 
         this->window->display(); 
 
