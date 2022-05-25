@@ -45,7 +45,7 @@ helpScreen::helpScreen(){
     text4.setString(
         "This is a particle simulator... But what does that mean?\n"
         "Our universe is made up of planets, stars, asteroids, moons, black holes... The list goes on and on!\n"
-        "Each of these comsmic bodies follows The Law of Universal Gravitation!!\n"
+        "Each of these cosmic bodies follows The Law of Universal Gravitation!!\n"
         "This law basically states that every body of mass in the universe is attracted to every other body of mass.\n"
         "This is why the moon orbits the earth and doesn't just fly away!\n"
         "This program simulates some simple particles, with their own properties such as mass,\n"
@@ -72,7 +72,8 @@ helpScreen::helpScreen(){
         "There is one vital decision for you to make! How many asteroids (particles) will\n"
         "orbit your planet? This decision will allow you to observe a chaotic motion\n"
         "of particles! or simply a serene stable orbit of a few asteroids around a planet\n\n"
-        "We hope you enjoy the simulator!"
+        "We hope you enjoy the simulator!\n\n"
+        "Press Escape to close this window"
     );
     text6.setCharacterSize(18);
     text6.setFillColor(Color::White);
@@ -92,6 +93,12 @@ helpScreen::helpScreen(){
                     this->window->close(); 
 
                     break; 
+                }
+
+                if (event.type == Event::KeyPressed){
+                    if (event.key.code == (sf::Keyboard::Escape)){
+					this->window->close();
+				    }
                 }
             }
 

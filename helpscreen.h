@@ -11,10 +11,8 @@ class helpScreen{
     public:
         RenderWindow* window; 
         VideoMode videoMode; 
-        Font font; 
 
         helpScreen(); 
-
 };
 
 
