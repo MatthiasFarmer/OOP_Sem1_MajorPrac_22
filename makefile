@@ -13,9 +13,12 @@ particle.o: particle.cpp
 gravitySource.o: gravitySource.cpp
 	g++ -c gravitySource.cpp  -IC:\Users\jacob\OneDrive\Documents\SFML-2.5.1\include -DSFML_STATIC
 
+helpscreen.o: helpscreen.cpp
+	g++ -c helpscreen.cpp -IC:\Users\jacob\OneDrive\Documents\SFML-2.5.1\include -DSFML_STATIC
+
 #Linking object files and building executable
-game: Game.o Main.o particle.o gravitySource.o
-	g++ Main.o gravitySource.o particle.o Game.o -o game.exe -L"C:\Users\jacob\OneDrive\Documents\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows
+game: Game.o Main.o particle.o gravitySource.o helpscreen.o
+	g++ Main.o gravitySource.o particle.o Game.o helpscreen.o -o game.exe -L"C:\Users\jacob\OneDrive\Documents\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows
 
 
 
