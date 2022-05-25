@@ -52,7 +52,7 @@ helpScreen::helpScreen(){
         "and dispays the outcome of an interaction between these particles.\n"
         "For example, your particle might have just the right mass and velocity,\n"
         "and start in just the right spot to follow a stable orbit of the gravity source!\n" 
-        "Or it might fly straight past or even crash!\n"
+        "Or it might fly straight past!\n"
         "Its up to you to choose the initial conditions of the particle, and observe the outcome!\n"
         );
     text4.setCharacterSize(18);
